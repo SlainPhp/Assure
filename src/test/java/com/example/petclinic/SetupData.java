@@ -1,4 +1,4 @@
-package Homework;
+package com.example.petclinic;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -6,20 +6,22 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
 
-public class BaseTest {
+public class SetupData {
+
     protected static RequestSpecification spec;
-    protected static int ownerId1;
-    protected static int ownerId2;
-    protected static int petTypeId;
-    protected static int specialtyId;
-    protected static int vetId1;
-    protected static int[] petIds = new int[5];
+
+    protected static int ownerId1 = 1;
+    protected static int [] petIds = {1, 2, 3, 4, 5};
+    protected static int [] vetIds = {1, 2, 3};
 
     @BeforeAll
-    public static void setUp() {
-        RestAssured.baseURI = "http://localhost:9966/petclinic";
+    static void setup() {
+        RestAssured.baseURI = "http://localhost:8080";
+
         spec = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .build();
+
+        System.out.println("Test environment configured.");
     }
 }
